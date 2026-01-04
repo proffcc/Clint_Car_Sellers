@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin</title>
+  <style>
+    body{background:#111;color:white;font-family:Arial;padding:20px}
+    input,button{padding:10px;margin:5px}
+    
+
+  </style>
+</head>
+<body>
+
+<script>
+if(!localStorage.getItem("catUser")) window.location="login.html";
+</script>
+<script>
+function goBack(){
+  window.history.back();
+}
+</script>
+
+
+<h2>Admin Dashboard</h2>
+<input placeholder="Car Name">
+<input placeholder="Price">
+<button style="alert('Admin feature simulated')">Save</button>
+
+<button style="background-color: red;color: blue;"onclick="goBack()">Back</button>
+
+</body>
+</html>

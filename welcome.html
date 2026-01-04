@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      color: white;
+      font-family: Arial;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="msg"></h1>
+
+<script>
+const user = localStorage.getItem("catUser");
+if(!user) window.location = "login.html";
+
+msg.innerText = "Welcome " + user + " to CatCars!";
+setTimeout(() => {
+  window.location = "index.html";
+}, 3000);
+</script>
+
+</body>
+</html>

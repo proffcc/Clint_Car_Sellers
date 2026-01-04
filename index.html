@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CatCars | Home</title>
+  <style>
+    body { margin:0; font-family:Arial; background:#f4f4f4 }
+    header {
+      background:#111; color:white;
+      padding:15px;
+      display:flex; justify-content:space-between;
+    }
+    a { color:white; margin-left:15px; text-decoration:none }
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      padding:20px;
+    }
+    .card {
+      background:white;
+      padding:15px;
+      border-radius:10px;
+    }
+    img { width:100%; border-radius:10px }
+    button {
+      background:#ff6600;
+      color:white;
+      border:none;
+      padding:8px;
+      margin-top:5px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+if(!localStorage.getItem("catUser")) window.location="login.html";
+</script>
+
+<header>
+  <h2>CatCars</h2>
+  <nav>
+    <a href="cart.html">Cart</a>
+    <a href="branches.html">Branches</a>
+    <a href="admin.html">Admin</a>
+    <a href="#" onclick="logout()" style="color:#ff6600">Logout</a>
+  </nav>
+</header>
+
+<select id="filter" onchange="render()" style="margin:20px">
+  <option value="all">All</option>
+  <option value="SUV">SUV</option>
+  <option value="Sedan">Sedan</option>
+</select>
+
+<div class="grid" id="cars"></div>
+
+<script>
+const carsData = [
+ {id:1,name:"Toyota Prado",type:"SUV",price:6500000,year:2022,fuel:"Diesel",engine:"2700cc",
+  img:"https://images.unsplash.com/photo-1619767886558-efdc259cde1a",
+  video:"https://www.w3schools.com/html/mov_bbb.mp4"},
+ {id:2,name:"BMW X5",type:"SUV",price:5200000,year:2021,fuel:"Petrol",engine:"3000cc",
+  img:"https://images.unsplash.com/photo-1605559424843-9e4c228bf1c3",
+  video:"https://www.w3schools.com/html/movie.mp4"},
+ {id:3,name:"Mercedes C200",type:"Sedan",price:4100000,year:2020,fuel:"Petrol",engine:"2000cc",
+  img:"https://images.unsplash.com/photo-1616788494707-ec28f08fd05c",
+  video:"https://www.w3schools.com/html/mov_bbb.mp4"}
+];
+
+function render(){
+  cars.innerHTML="";
+  const f = filter.value;
+  carsData.filter(c=>f==="all"||c.type===f).forEach(c=>{
+    cars.innerHTML+=`
+      <div class="card">
+        <img src="${c.img}">
+        <h3>${c.name}</h3>
+        <p>KES ${c.price}</p>
+        <button onclick="view(${c.id})">View Details</button>
+        <button onclick="add(${c.id})">Add to Cart</button>
+      </div>`;
+  });
+}
+render();
+
+function view(id){
+  localStorage.setItem("selectedCar",
+    JSON.stringify(carsData.find(c=>c.id===id)));
+  window.location="details.html";
+}
+
+function add(id){
+  let cart = JSON.parse(localStorage.getItem("cart")||"[]");
+  cart.push(carsData.find(c=>c.id===id));
+  localStorage.setItem("cart",JSON.stringify(cart));
+  alert("Added to cart");
+}
+
+function logout(){
+  localStorage.clear();
+  window.location="login.html";
+}
+</script>
+
+</body>
+</html>

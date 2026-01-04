@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CatCars | Login</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(120deg,#111,#ff6600);
+      font-family: Arial;
+      color: white;
+    }
+    .box {
+      background: black;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background: #ff6600;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Login to CatCars</h2>
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<script>
+function login(){
+  if(user.value.trim() !== ""){
+    localStorage.setItem("catUser", user.value);
+    window.location = "welcome.html";
+  } else {
+    alert("Enter username");
+  }
+}
+</script>
+
+</body>
+</html>

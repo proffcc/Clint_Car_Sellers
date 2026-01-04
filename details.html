@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Car Details</title>
+  <style>
+    body{font-family:Arial;background:#f4f4f4;margin:0}
+    header{background:#111;color:white;padding:15px}
+    .container{max-width:900px;margin:auto;padding:20px}
+    img,video{width:100%;border-radius:10px;margin:10px 0}
+    .specs{background:white;padding:15px;border-radius:10px}
+  </style>
+</head>
+<body>
+
+<script>
+if(!localStorage.getItem("catUser")) window.location="login.html";
+</script>
+
+<header>
+<script>
+function goBack(){
+  window.history.back();
+}
+</script>
+
+</header>
+
+<div class="container">
+  <h2 id="title"></h2>
+  <img id="img">
+  <video id="vid" controls></video>
+  <div class="specs" id="specs"></div>
+</div>
+
+<script>
+const car = JSON.parse(localStorage.getItem("selectedCar"));
+if(!car) window.location="index.html";
+
+title.innerText = car.name;
+img.src = car.img;
+vid.src = car.video;
+specs.innerHTML = `
+<p>Price: KES ${car.price}</p>
+<p>Engine: ${car.engine}</p>
+<p>Fuel: ${car.fuel}</p>
+<p>Year: ${car.year}</p>`;
+</script>
+
+</body>
+</html>

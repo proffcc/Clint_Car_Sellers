@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+ 
+<title>Cart</title></head>
+<body>
+
+<script>
+if(!localStorage.getItem("catUser")) window.location="login.html";
+</script>
+<script>
+function goBack(){
+  window.history.back();
+}
+</script>
+
+<h2>Your Cart</h2>
+<div id="list"></div>
+<h3 id="total"></h3>
+<button style="background-color: rgb(51, 241, 232);color: rgb(250, 125, 8);"onclick="goBack()">Back</button>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")||"[]");
+let sum = 0;
+
+cart.forEach((c,i)=>{
+  sum += c.price;
+  list.innerHTML += `
+    <p>${c.name} - KES ${c.price}
+    <button onclick="removeItem(${i})">Remove</button></p>`;
+});
+
+total.innerText = "Total: KES " + sum;
+
+function removeItem(i){
+  cart.splice(i,1);
+  localStorage.setItem("cart",JSON.stringify(cart));
+  location.reload();
+}
+</script>
+
+</body>
+</html>
